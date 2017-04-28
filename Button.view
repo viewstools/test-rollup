@@ -1,0 +1,15 @@
+Vertical
+backgroundColorActive deepskyblue
+backgroundColorHover turquoise
+backgroundColorActiveHover purple
+borderRadius 8
+isActive props.isActive
+margin props.margin
+onClick props.onClick
+padding 20
+transition all 0.2s linear
+Text
+color white
+fontFamily Roboto, sans-serif
+fontSize 14
+text props.text

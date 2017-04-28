@@ -1,0 +1,28 @@
+{
+  "name": "views-test-rollup",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Views (viewsdx.com), React, and rollup test app",
+  "main": "index.js",
+  "author": "Darío Javier Cravero <dario@uxtemple.com>",
+  "license": "BSD-Clause-3",
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "node-static": "^0.7.9",
+    "rollup": "^0.41.6",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-watch": "^3.2.2"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.8",
+    "react": "next",
+    "react-dom": "next",
+    "react-router-dom": "^4.1.1",
+    "react-time": "^4.3.0",
+    "style-to-css": "^1.0.3"
+  },
+  "scripts": {
+    "prestart": "browserify vendor.js > public/vendor.js",
+    "start": "trap 'kill %1' SIGINT && rollup --watch --config rollup.config.js & static public --port 3000 --cache 0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'"
+  }
+}

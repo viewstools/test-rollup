@@ -1,0 +1,7 @@
+window.toCSS = require('style-to-css')
+window.PropTypes = require('prop-types')
+window.React = require('react')
+window.reactDom = require('react-dom')
+window.reactRouterDom = require('react-router-dom')
+window.Time = require('react-time')
+window.moment = require('moment')

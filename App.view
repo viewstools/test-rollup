@@ -1,0 +1,43 @@
+App is Vertical
+
+backgroundColor deeppink
+borderRadius 4
+margin 30
+width props.width
+
+Title is Text
+color white
+padding 20
+fontFamily Roboto, sans-serif
+fontSize 40
+text I'm an app...
+
+List
+backgroundColor #ffffff
+from props.listOfStuff
+padding 20
+Text
+color item.color
+marginTop 5
+text ${i + 1}. ${item.label}
+
+
+Button
+isActive props.isActive
+margin 20
+onClick props.onClick
+text props.text
+
+AnotherButton
+margin 20
+text Another Button
+
+Vertical
+margin 20
+Time
+value props.time
+format DD.MM.YYYY
+style
+color white
+fontFamily Roboto, sans-serif
+fontSize 20
