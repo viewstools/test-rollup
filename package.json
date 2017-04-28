@@ -14,11 +14,13 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
+    "moment": "^2.18.1",
     "prop-types": "^15.5.8",
     "react": "next",
     "react-dom": "next",
     "react-router-dom": "^4.1.1",
     "react-time": "^4.3.0",
+    "rollup-plugin-views": "^0.0.1",
     "style-to-css": "^1.0.3"
   },
   "scripts": {
