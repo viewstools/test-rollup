@@ -1481,6 +1481,10 @@ value-equal@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.2.1.tgz#c220a304361fce6994dbbedaa3c7e1a1b895871d"
 
+views-blocks-react-dom@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/views-blocks-react-dom/-/views-blocks-react-dom-0.0.1.tgz#473e4dcb2dd73edbf504f12511d89bf0ff3c4dde"
+
 views-morph@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/views-morph/-/views-morph-0.0.1.tgz#3b64587e5404936a508c247c924c82279d4b1989"

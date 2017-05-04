@@ -3,13 +3,16 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { render } from 'react-dom'
 
-const listOfStuff = [{
-  label: 'hey',
-  color: 'salmon'
-}, {
-  label: 'ho',
-  color: 'red'
-}]
+const listOfStuff = [
+  {
+    label: 'hey',
+    color: 'salmon',
+  },
+  {
+    label: 'ho',
+    color: 'red',
+  },
+]
 
 class Home extends React.Component {
   constructor(props) {
@@ -37,7 +40,7 @@ class Home extends React.Component {
         listOfStuff={listOfStuff}
         onClick={this.onClick}
         time={new Date()}
-        text='Click me 👻'
+        text="Click me 👻"
         width={360}
       />
     )
@@ -46,7 +49,7 @@ class Home extends React.Component {
 
 render(
   <Router>
-    <Route path='/' component={Home} />
+    <Route path="/" component={Home} />
   </Router>,
   document.getElementById('root')
 )

@@ -1,10 +1,9 @@
-(function (React,toCSS,PropTypes,Time,reactRouterDom,reactDom) {
+(function (React,toCSS,PropTypes,reactRouterDom,reactDom) {
 'use strict';
 
 React = 'default' in React ? React['default'] : React;
 toCSS = 'default' in toCSS ? toCSS['default'] : toCSS;
 PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
-Time = 'default' in Time ? Time['default'] : Time;
 
 // https://github.com/darkskyapp/string-hash/blob/master/index.js
 var hash = function (str) {
@@ -164,6 +163,10 @@ var button$1 = function (props) { return (
   )
 ); };
 
+console.warn("/Users/craverod/views/test-rollup/NewThing.view doesn't exist but it is being used. Create the file!"); var NewThing = function () { return React.createElement( 'div', null, "NewThing 👻" ); };
+
+console.warn("/Users/craverod/views/test-rollup/Time.view doesn't exist but it is being used. Create the file!"); var Time = function () { return React.createElement( 'div', null, "Time 👻" ); };
+
 var app = function (props) { return (
   React.createElement( 'div', {
     style: {
@@ -211,19 +214,22 @@ var app = function (props) { return (
           color: 'white',
           fontFamily: 'Roboto, sans-serif',
           fontSize: 20,
-        } })
+        } }),
+      React.createElement( NewThing, { text: "hey" })
     ),
     props.children
   )
 ); };
 
-var listOfStuff = [{
-  label: 'hey',
-  color: 'salmon'
-}, {
-  label: 'ho',
-  color: 'red'
-}];
+var listOfStuff = [
+  {
+    label: 'hey',
+    color: 'salmon',
+  },
+  {
+    label: 'ho',
+    color: 'red',
+  } ];
 
 var Home = (function (superclass) {
   function Home(props) {
@@ -253,7 +259,7 @@ var Home = (function (superclass) {
 
     return (
       React.createElement( app, {
-        isActive: state.isActive, listOfStuff: listOfStuff, onClick: this.onClick, time: new Date(), text: 'Click me 👻', width: 360 })
+        isActive: state.isActive, listOfStuff: listOfStuff, onClick: this.onClick, time: new Date(), text: "Click me 👻", width: 360 })
     )
   };
 
@@ -262,9 +268,9 @@ var Home = (function (superclass) {
 
 reactDom.render(
   React.createElement( reactRouterDom.BrowserRouter, null,
-    React.createElement( reactRouterDom.Route, { path: '/', component: Home })
+    React.createElement( reactRouterDom.Route, { path: "/", component: Home })
   ),
   document.getElementById('root')
 );
 
-}(React,toCSS,PropTypes,Time,reactRouterDom,reactDom));
+}(React,toCSS,PropTypes,reactRouterDom,reactDom));

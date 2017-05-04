@@ -1,9 +1,7 @@
 import buble from 'rollup-plugin-buble'
 import views from 'rollup-plugin-views'
 
-const DONT_WARN_ON = [
-  'MISSING_GLOBAL_NAME',
-]
+const DONT_WARN_ON = ['MISSING_GLOBAL_NAME']
 
 export default {
   entry: 'index.js',
@@ -16,7 +14,11 @@ export default {
     }
   },
   plugins: [
-    views(),
+    views({
+      map: {
+        Time: 'react-time',
+      },
+    }),
     buble(),
-  ]
+  ],
 }

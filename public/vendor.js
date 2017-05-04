@@ -2019,7 +2019,7 @@ var createBrowserHistory = function createBrowserHistory() {
 };
 
 exports.default = createBrowserHistory;
-},{"./DOMUtils":22,"./LocationUtils":23,"./PathUtils":24,"./createTransitionManager":28,"invariant":30,"warning":80}],26:[function(require,module,exports){
+},{"./DOMUtils":22,"./LocationUtils":23,"./PathUtils":24,"./createTransitionManager":28,"invariant":30,"warning":81}],26:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2342,7 +2342,7 @@ var createHashHistory = function createHashHistory() {
 };
 
 exports.default = createHashHistory;
-},{"./DOMUtils":22,"./LocationUtils":23,"./PathUtils":24,"./createTransitionManager":28,"invariant":30,"warning":80}],27:[function(require,module,exports){
+},{"./DOMUtils":22,"./LocationUtils":23,"./PathUtils":24,"./createTransitionManager":28,"invariant":30,"warning":81}],27:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2513,7 +2513,7 @@ var createMemoryHistory = function createMemoryHistory() {
 };
 
 exports.default = createMemoryHistory;
-},{"./LocationUtils":23,"./PathUtils":24,"./createTransitionManager":28,"warning":80}],28:[function(require,module,exports){
+},{"./LocationUtils":23,"./PathUtils":24,"./createTransitionManager":28,"warning":81}],28:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2599,7 +2599,7 @@ var createTransitionManager = function createTransitionManager() {
 };
 
 exports.default = createTransitionManager;
-},{"warning":80}],29:[function(require,module,exports){
+},{"warning":81}],29:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -25251,7 +25251,7 @@ Route.childContextTypes = {
   router: _propTypes2.default.object.isRequired
 };
 exports.default = Route;
-},{"./matchPath":67,"prop-types":40,"react":73,"warning":80}],63:[function(require,module,exports){
+},{"./matchPath":67,"prop-types":40,"react":73,"warning":81}],63:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25371,7 +25371,7 @@ Router.childContextTypes = {
   router: _propTypes2.default.object.isRequired
 };
 exports.default = Router;
-},{"invariant":30,"prop-types":40,"react":73,"warning":80}],64:[function(require,module,exports){
+},{"invariant":30,"prop-types":40,"react":73,"warning":81}],64:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25637,7 +25637,7 @@ Switch.propTypes = {
   location: _propTypes2.default.object
 };
 exports.default = Switch;
-},{"./matchPath":67,"prop-types":40,"react":73,"warning":80}],66:[function(require,module,exports){
+},{"./matchPath":67,"prop-types":40,"react":73,"warning":81}],66:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28493,6 +28493,146 @@ var valueEqual = function valueEqual(a, b) {
 
 exports.default = valueEqual;
 },{}],80:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = _interopDefault(require('react'));
+var toCSS = _interopDefault(require('style-to-css'));
+var PropTypes = _interopDefault(require('prop-types'));
+var reactRouterDom = require('react-router-dom');
+
+// https://github.com/darkskyapp/string-hash/blob/master/index.js
+var hash = function (str) {
+  var vhash = 5381;
+  var i = str.length;
+
+  while (i) {
+    vhash = (vhash * 33) ^ str.charCodeAt(--i);
+  }
+  return vhash >>> 0;
+};
+
+var getStyle = function (props) {
+  if (!(props.style || props.styleActive || props.styleHover || props.styleActiveHover )) { return null }
+
+  var style = toCSS(props.style);
+  var className = "s-" + (Date.now()) + (hash(style));
+
+  var theStyle = [
+    ("." + className + "{" + style + "}"),
+    props.styleActive && ("." + className + ".active{" + (toCSS(props.styleActive)) + "}"),
+    props.styleHover && ("." + className + ":hover{" + (toCSS(props.styleHover)) + "}"),
+    props.styleActiveHover && ("." + className + ".active:hover{" + (toCSS(props.styleActiveHover)) + "}") ].filter(Boolean).join('');
+
+  return {
+    className: className,
+    style: React.createElement( 'style', null, theStyle ),
+  }
+};
+
+var Action = (function (superclass) {
+  function Action(props) {
+    superclass.call(this, props);
+    this.state = getStyle(props);
+  }
+
+  if ( superclass ) Action.__proto__ = superclass;
+  Action.prototype = Object.create( superclass && superclass.prototype );
+  Action.prototype.constructor = Action;
+
+  Action.prototype.componentWillReceiveProps = function componentWillReceiveProps (nextProps) {
+    this.setState(getStyle(nextProps));
+  };
+
+  Action.prototype.render = function render () {
+    var ref = this;
+    var props = ref.props;
+    var state = ref.state;
+
+    return (
+      React.createElement( 'button', {
+        className: props.isActive ? ((state.className) + " active") : state.className, onClick: props.onClick },
+        state.style,
+        props.children
+      )
+    )
+  };
+
+  return Action;
+}(React.Component));
+
+Action.propTypes = {
+  isActive: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  styleActive: PropTypes.object,
+  styleActiveHover: PropTypes.object,
+  styleHover: PropTypes.object,
+};
+
+var TRAILING_SLASH = /\/$/;
+var withTrailingSlash = function (path) { return (
+  TRAILING_SLASH.test(path)? path : (path + "/")
+); };
+
+var Teleport = (function (superclass) {
+  function Teleport(props) {
+    superclass.call(this, props);
+    this.state = getStyle(props);
+  }
+
+  if ( superclass ) Teleport.__proto__ = superclass;
+  Teleport.prototype = Object.create( superclass && superclass.prototype );
+  Teleport.prototype.constructor = Teleport;
+
+  Teleport.prototype.render = function render () {
+    var ref = this;
+    var props = ref.props;
+    var state = ref.state;
+    var ref$1 = this.context.router;
+    var route = ref$1.route;
+
+    var to = "" + (withTrailingSlash(route.match.url)) + (props.to);
+    var isActive = props.isActive || route.location.pathname === to;
+
+    return props.to ? (
+      React.createElement( reactRouterDom.Link, {
+        className: isActive ? ((state.className) + " active") : state.className, to: to, onClick: props.onClick },
+        state.style,
+        props.children
+      )
+    ) : (
+      React.createElement( 'div', {
+        className: state.className },
+        state.style,
+        props.children
+      )
+    )
+  };
+
+  return Teleport;
+}(React.Component));
+
+Teleport.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
+Teleport.propTypes = {
+  isActive: PropTypes.bool,
+  onClick: PropTypes.func,
+  style: PropTypes.object,
+  styleActive: PropTypes.object,
+  styleActiveHover: PropTypes.object,
+  styleHover: PropTypes.object,
+};
+
+exports.ViewsAction = Action;
+exports.ViewsTeleport = Teleport;
+
+},{"prop-types":40,"react":73,"react-router-dom":56,"style-to-css":75}],81:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -28556,7 +28696,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"_process":35}],81:[function(require,module,exports){
+},{"_process":35}],82:[function(require,module,exports){
 window.toCSS = require('style-to-css')
 window.PropTypes = require('prop-types')
 window.React = require('react')
@@ -28564,5 +28704,6 @@ window.reactDom = require('react-dom')
 window.reactRouterDom = require('react-router-dom')
 window.Time = require('react-time')
 window.moment = require('moment')
+window.viewsBlocksReactDom = require('views-blocks-react-dom')
 
-},{"moment":31,"prop-types":40,"react":73,"react-dom":44,"react-router-dom":56,"react-time":70,"style-to-css":75}]},{},[81]);
+},{"moment":31,"prop-types":40,"react":73,"react-dom":44,"react-router-dom":56,"react-time":70,"style-to-css":75,"views-blocks-react-dom":80}]},{},[82]);

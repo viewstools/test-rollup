@@ -21,7 +21,8 @@
     "react-router-dom": "^4.1.1",
     "react-time": "^4.3.0",
     "rollup-plugin-views": "^0.0.1",
-    "style-to-css": "^1.0.3"
+    "style-to-css": "^1.0.3",
+    "views-blocks-react-dom": "^0.0.1"
   },
   "scripts": {
     "prestart": "browserify vendor.js > public/vendor.js",

@@ -41,3 +41,6 @@ style
 color white
 fontFamily Roboto, sans-serif
 fontSize 20
+
+NewThing
+text hey
