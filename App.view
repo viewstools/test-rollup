@@ -1,12 +1,11 @@
 App is Vertical
-
 backgroundColor deeppink
 borderRadius 4
 margin 30
 width props.width
 
 Title is Text
-color white
+# color white
 padding 20
 fontFamily Roboto, sans-serif
 fontSize 40
@@ -23,6 +22,7 @@ text ${i + 1}. ${item.label}
 
 
 Button
+icon Icon
 isActive props.isActive
 margin 20
 onClick props.onClick
@@ -31,7 +31,6 @@ text props.text
 AnotherButton
 margin 20
 text Another Button
-
 Vertical
 margin 20
 Time
@@ -41,6 +40,3 @@ style
 color white
 fontFamily Roboto, sans-serif
 fontSize 20
-
-NewThing
-text hey

@@ -1,0 +1,3 @@
+Text
+fontSize props.fontSize || 50
+text 🤖

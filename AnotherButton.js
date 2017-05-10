@@ -1,6 +1,8 @@
 import Button from './Button.view'
 import React from 'react'
 
+const AnotherIcon = () => <div style={{ fontSize: 50 }}>😇</div>
+
 export default class AnotherButton extends React.Component {
   constructor(props) {
     super(props)
@@ -23,6 +25,7 @@ export default class AnotherButton extends React.Component {
 
     return (
       <Button
+        icon={AnotherIcon}
         isActive={state.isActive}
         margin={props.margin}
         onClick={this.onClick}

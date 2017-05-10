@@ -1,4 +1,5 @@
-Vertical
+Horizontal
+alignItems center
 backgroundColorActive deepskyblue
 backgroundColorHover turquoise
 backgroundColorActiveHover purple
@@ -8,8 +9,12 @@ margin props.margin
 onClick props.onClick
 padding 20
 transition all 0.2s linear
+Icon is Proxy
+from props.icon
+fontSize 80
 Text
 color white
 fontFamily Roboto, sans-serif
 fontSize 14
+marginLeft 10
 text props.text
